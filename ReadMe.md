@@ -9,3 +9,32 @@ Copilot don't know how to translate "If ... End If" to C# "if {...}" when there 
 
 
 ![WpfFileBrowserScreenshot](./WpfFileBrowserScreenshot.png)
+
+# Explanation of the code:
+
+    xmlns:local="clr-namespace:WpfFileBrowser"
+
+local:: Refers to the current project’s namespace (WpfFileBrowser), allowing you to use your own classes like Folder.
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="RootFolderDataProvider" >
+            <ObjectDataProvider.ObjectInstance>
+                <local:Folder FullPath="c:\"/>
+            </ObjectDataProvider.ObjectInstance>
+        </ObjectDataProvider>
+        <HierarchicalDataTemplate 
+            DataType    = "{x:Type local:Folder}"
+            ItemsSource = "{Binding Path=SubFolders}">
+            <TextBlock Text="{Binding Path=Name}" />
+        </HierarchicalDataTemplate>
+    </Window.Resources>
+
+What this does:
+
+Window.Resources: Declares reusable resources for the window.
+
+ObjectDataProvider: Wraps a .NET object (Folder) so it can be used as a data source in XAML.
+
+x:Key="RootFolderDataProvider": Gives the resource a name so it can be referenced in bindings.
+
+<local:Folder FullPath="c:\"/>: Instantiates your custom Folder class with the root path C:\.
