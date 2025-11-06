@@ -6,3 +6,6 @@ https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2
 I put example file Folder.vb in this repo for reference. I translated it to C# as Folder.cs
 Initially I used Microsoft Copilot (on 11/6/2025) to translate it, but translation was not perfect. 
 Copilot don't know how to translate "If ... End If" to C# when ther are several statements in between.
+
+
+![WpfFileBrowserScreenshot](./WpfFileBrowserScreenshot.png)
