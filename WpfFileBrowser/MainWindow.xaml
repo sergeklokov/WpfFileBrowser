@@ -6,6 +6,23 @@
         xmlns:local="clr-namespace:WpfFileBrowser"
         mc:Ignorable="d"
         Title="Folder Explorer" Height="450" Width="800">
+
+    <Window.Resources>
+
+        <ObjectDataProvider x:Key="RootFolderDataProvider" >
+            <ObjectDataProvider.ObjectInstance>
+                <local:Folder FullPath="c:\"/>
+            </ObjectDataProvider.ObjectInstance>
+        </ObjectDataProvider>
+
+        <HierarchicalDataTemplate 
+            DataType    = "{x:Type local:Folder}"
+            ItemsSource = "{Binding Path=SubFolders}">
+            <TextBlock Text="{Binding Path=Name}" />
+        </HierarchicalDataTemplate>
+
+    </Window.Resources>
+    
     <Grid RenderTransformOrigin="0.531,0.516">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -15,7 +32,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TreeView Grid.RowSpan="4"/>
+
+        <TreeView Grid.ColumnSpan="1" Grid.RowSpan="2" Margin="0,0,0,0" Name="treeView1" >
+            <TreeViewItem ItemsSource="{Binding Path=SubFolders, Source={StaticResource RootFolderDataProvider}}" Header="Folders"  />
+        </TreeView>
+        
         <ListView Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.View>
                 <GridView>
