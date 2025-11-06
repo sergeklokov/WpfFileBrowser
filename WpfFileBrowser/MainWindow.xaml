@@ -36,21 +36,16 @@
         <TreeView Grid.ColumnSpan="1" Grid.RowSpan="2" Margin="0,0,0,0" Name="treeView1" >
             <TreeViewItem ItemsSource="{Binding Path=SubFolders, Source={StaticResource RootFolderDataProvider}}" Header="Folders"  />
         </TreeView>
-        
-        <ListView Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <ListView Grid.Column="1" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+
+        <ListView Name="listView1" 
+            ItemsSource="{Binding Path=SelectedItem.SubFolders, ElementName=treeView1, Mode=OneWay}" 
+            Grid.Column="1" 
+            Grid.RowSpan="1" />
+
+        <ListView Name="listView2" 
+            ItemsSource="{Binding Path=SelectedItem.Files, ElementName=treeView1, Mode=OneWay}" 
+            Grid.Column="1" 
+            Grid.Row="1" />
 
     </Grid>
 </Window>
